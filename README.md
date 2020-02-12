@@ -1,2 +1,2 @@
 # online-library
-A simple virtual library where you can list the books in your possession 
+A simple virtual library where you can list books in your possession 
