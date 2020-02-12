@@ -1,0 +1,19 @@
+.btn {
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    background: rgb(114, 57, 57);
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    cursor: pointer;
+    color: rgb(231, 231, 169);
+    border-radius: 6px;
+}
+
+.book-creation-form {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
