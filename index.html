@@ -6,23 +6,41 @@
     </title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <form class="book-creation-form">
-            <input class="book-author-input" type="text">
-            <input class="book-title-input" type="text">
-            <input class="book-pagenum-input" type="text">
-            <label for="is-read">Read</label>
-            <input type="checkbox" name="checkbox" id="is-read" >
-            <div class="btn create-book-btn">
-                Create
-            </div>
-        </form>
-
+        <header>
+            <h1>
+                ARCHIVE OF WISDOM
+            </h1>
+        </header>
         
-        <div class="book-display">
-            
+        <div class="bookshelf">
+            <div class="btn add-book">
+                <div>Add</div>
+                <div>Book</div>
+            </div>
+            <div class="book-display">
+                
+                
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <form class="book-creation-form">
+                    <input class="book-author-input" type="text">
+                    <input class="book-title-input" type="text">
+                    <input class="book-pagenum-input" type="text">
+                    <label for="is-read">Read</label>
+                    <input type="checkbox" name="checkbox" id="is-read" >
+                    <div class="btn create-book-btn">
+                        Create
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
