@@ -20,7 +20,7 @@ header {
 
 h1 {
     line-height: 180px;
-    font-size: 50px;
+    font-size: 3.5rem;
     text-align: center;
     color: rgb(236, 219, 195);
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
@@ -115,10 +115,11 @@ h1 {
     position: fixed;
     content: "HOVER BOOKS FOR MORE INFO";
     font-family: 'Open Sans Condensed', sans-serif;
-    bottom: 20%;
-    left: 20px;
+    bottom: 30%;
+    left: 2rem;
     transform-origin: left;
     transform: rotate(270deg);
+    font-size: 1.5rem;
 }
 
 .book-display {
@@ -138,7 +139,7 @@ h1 {
     place-self: center;
     transition: opacity 0.5s 0s, transform 0.5s;
     border-radius: 0 0 3px 3px;
-    margin: 0 0 30px 0;
+    margin: 0 0 2.5rem 0;
 }
 
 .hidden {
@@ -158,9 +159,9 @@ h1 {
     box-sizing: border-box;
     color: rgb(236, 219, 195);
     background: rgb(114, 57, 57);
-    width: 160px;
-    height: 200px;
-    padding: 10px;
+    width: 200px;
+    height: 260px;
+    padding: 1rem;
     border: 6px solid rgb(85, 42, 42);
     box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.9);
     z-index: 1;
@@ -173,6 +174,9 @@ h1 {
 
 .title-container h2 {
     font-weight: bold;
+    font-size: 1.6rem;
+}
+.title-container h3 {
     font-size: 1.4rem;
 }
 
@@ -180,7 +184,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
     border: 2px solid rgb(85, 42, 42);
@@ -198,7 +202,7 @@ h1 {
 
 
 .page-num {
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -207,7 +211,7 @@ h1 {
     color: rgb(172, 55, 55);
     cursor: pointer;
     user-select: none;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: bold;
     font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -229,6 +233,7 @@ h1 {
     user-select: none;
     cursor: pointer;
     color: rgb(85, 42, 42);
+    font-size: 1.5rem;
 }
 
 .sofa {
@@ -256,38 +261,44 @@ h1 {
     flex-direction: column;
     align-items: center;
     position: absolute;
+    padding: 1.5rem 2rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgb(143, 39, 39);
-    padding: 1rem 1.5rem;
-    width: 14rem;
-    height: 18rem;
+    width: 20rem;
+    height: 24rem;
     border-radius: 0.5rem;
     color: rgb(236, 219, 195);
     font-family: 'Open Sans Condensed', sans-serif;
 }
 .modal-content input {
-    margin: 10px 0;
+    margin: 0.8rem 0;
+    width: 100%;
     background: none;
     border: none;
     border-bottom: 1px solid rgb(236, 219, 195);
     color: rgb(236, 219, 195);
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
 }
 .modal-content input:focus {
     outline: none;
 }
 .is-read-container {
-    margin: 10px 0;
+    display:flex;
+    margin: 2rem 0;
+    align-items: center;
 }
 #is-read {
-    margin-left: 5px;
-    vertical-align: middle;
+    width: auto;
+    margin-left: 1rem;
+}
+.book-creation-form {
+    width: 100%;
 }
 .book-creation-form label {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 .create-book-btn {
     align-self: center;
@@ -295,6 +306,9 @@ h1 {
     color: rgb(236, 219, 195);
     margin-top: 0.8rem;
     border-radius: 0px;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
 }
 .create-book-btn:hover {
     background-color: #794040;
@@ -308,6 +322,7 @@ h1 {
     border-radius: 0.25rem;
     background-color: rgb(236, 219, 195);
     color: #771c1d;
+    margin-bottom: 1rem;
 }
 .close-btn:hover {
     background-color: rgb(228, 206, 176);;
@@ -324,7 +339,7 @@ h1 {
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
     .book-display {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
@@ -334,11 +349,11 @@ h1 {
     }
 
     h1 {
-        font-size: 40px;
+        font-size: 3rem;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .book-display {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: auto;
@@ -348,7 +363,6 @@ h1 {
     }
 
     h1 {
-        font-size: 30px;
+        font-size: 2rem;
     }
-}
 }
