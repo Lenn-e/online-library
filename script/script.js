@@ -19,6 +19,16 @@ window.addEventListener('click', event => {
     }
 });
 
+const COVER_COLORS = [
+    {background: "#4b8b81", border: "#345e57"},
+    {background: "#7E7F9A", border: "#535679"},
+    {background: "#90a5b0", border: "#748690"},
+    {background: "#d3a117", border: "#b18610"},
+    {background: "#E0612A", border: "#c35322"},
+    {background: "#723939", border: "#552a2a"},
+    {background: "#cb6c89", border: "#a1576d"}
+]
+
 let myLibrary = [];
 
 myLibrary.push(new Book('Frank Herbert', 'Dune', '600', false, 1));
@@ -40,6 +50,14 @@ function Book(author, title, pageNum, isRead, ID) {
 
 Book.prototype.toggleRead = function() {
     this.isRead = !this.isRead;
+}
+
+Book.prototype.getCoverColor = function() {
+    let rand = Math.floor(Math.random() * COVER_COLORS.length);
+    let length = COVER_COLORS.length;
+    console.log("rand: " + rand, "array length: " + length)
+    return COVER_COLORS[rand];
+    /* return COVER_COLORS[Math.round(Math.random() * COVER_COLORS.length)]; */
 }
 
 function addBookToLibrary() {
@@ -87,6 +105,9 @@ function bookToNode(book) {
 
     let titleContainer = document.createElement('div');
     titleContainer.classList.add('title-container');
+    let coverColor = book.getCoverColor();
+    titleContainer.style.background = coverColor.background;
+    titleContainer.style["border-color"] = coverColor.border;
 
     let titleDisplay = document.createElement('h2');
     titleDisplay.textContent = book.title;

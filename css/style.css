@@ -245,20 +245,26 @@ h1 {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
     z-index: 1;
 }
 .modal-content {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background: linear-gradient(rgb(117, 28, 28), rgb(143, 39, 39));
     padding: 1rem 1.5rem;
     width: 24rem;
     border-radius: 0.5rem;
+}
+.modal-content input {
+    background: none;
+    border: none;
 }
 .close-btn {
     float: right;
