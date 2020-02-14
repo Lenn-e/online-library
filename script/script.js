@@ -77,6 +77,7 @@ function changeReadStatus() {
     book.toggleRead();
 
     this.classList.toggle("read");
+    this.childNodes[0].classList.toggle("hide");
 }
 
 function bookToNode(book) {
@@ -98,10 +99,20 @@ function bookToNode(book) {
     pageNumDisplay.textContent = `${book.pageNum} pages`;
 
     let isReadDisplay = document.createElement('div');
-    isReadDisplay.classList.add('read-indicator');
+    isReadDisplay.classList.add("read-display");
+    let unText = document.createElement('span');
+    let readText = document.createElement('span');
+    unText.textContent = "UN";
+    readText.textContent = "READ";
+    unText.classList.add("un-text");
+    isReadDisplay.appendChild(unText);
+    isReadDisplay.appendChild(readText);
+
     if(book.isRead) {
-        isReadDisplay.classList.add('read');
+        unText.classList.add("hide");
+        isReadDisplay.classList.toggle("read");
     }
+
     isReadDisplay.addEventListener("click", changeReadStatus);
 
     let removeButton = document.createElement('span');
@@ -112,6 +123,7 @@ function bookToNode(book) {
     let metaContainer = document.createElement('div');
     metaContainer.classList.add('meta-container');
 
+    
     outterContainer.appendChild(titleContainer);
     outterContainer.appendChild(metaContainer);
     metaContainer.appendChild(pageNumDisplay);
