@@ -19,8 +19,8 @@ header {
 }
 
 h1 {
-    padding: 70px 0 50px 0;
-    font-size: 60px;
+    line-height: 180px;
+    font-size: 50px;
     text-align: center;
     color: rgb(236, 219, 195);
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
@@ -228,11 +228,12 @@ h1 {
 .remove-btn {
     user-select: none;
     cursor: pointer;
+    color: rgb(85, 42, 42);
 }
 
 .sofa {
     position: fixed;
-    bottom: 5px;
+    bottom: 10px;
     right: 5px;
     width: 10%;
 }
@@ -244,39 +245,72 @@ h1 {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: visible;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
     z-index: 1;
+    opacity: 0;
+    visibility: hidden;
 }
 .modal-content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(rgb(117, 28, 28), rgb(143, 39, 39));
+    background: rgb(143, 39, 39);
     padding: 1rem 1.5rem;
-    width: 24rem;
+    width: 14rem;
+    height: 18rem;
     border-radius: 0.5rem;
+    color: rgb(236, 219, 195);
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 .modal-content input {
+    margin: 10px 0;
     background: none;
     border: none;
+    border-bottom: 1px solid rgb(236, 219, 195);
+    color: rgb(236, 219, 195);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.1rem;
+}
+.modal-content input:focus {
+    outline: none;
+}
+.is-read-container {
+    margin: 10px 0;
+}
+#is-read {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.book-creation-form label {
+    font-size: 0.9rem;
+}
+.create-book-btn {
+    align-self: center;
+    border: 2px solid rgb(85, 42, 42);
+    color: rgb(236, 219, 195);
+    margin-top: 0.8rem;
+    border-radius: 0px;
+}
+.create-book-btn:hover {
+    background-color: #794040;
 }
 .close-btn {
-    float: right;
+    align-self: flex-end;
     width: 1.5rem;
     line-height: 1.5rem;
     text-align: center;
     cursor: pointer;
     border-radius: 0.25rem;
-    background-color: lightgray;
+    background-color: rgb(236, 219, 195);
+    color: #771c1d;
 }
 .close-btn:hover {
-    background-color: darkgray;
+    background-color: rgb(228, 206, 176);;
 }
 .show-modal {
     opacity: 1;
@@ -284,6 +318,37 @@ h1 {
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
+::placeholder {
+    color: rgb(236, 219, 195);
+    opacity: 0.7; /* Firefox */
+}
 
 
-                
+@media (max-width: 1000px) {
+    .book-display {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: max-content;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .book-display {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        grid-auto-rows: max-content;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
+}
