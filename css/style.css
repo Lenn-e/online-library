@@ -28,9 +28,11 @@ h1 {
 }
 
 .container {
+    box-sizing: border-box;
     position: relative;
     min-height: 100vh;
     background: linear-gradient(rgb(117, 28, 28), rgb(143, 39, 39));
+    border: 10px solid black;
 }
 
 .btn {
@@ -50,7 +52,7 @@ h1 {
 .add-book {
     position: absolute;
     left: 15%;
-    top: -200px;
+    top: -170px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,10 +108,21 @@ h1 {
 
 .bookshelf {
     position: relative;
-    margin-top: 150px;
+    margin-top: 120px;
+}
+
+.bookshelf::before {
+    position: fixed;
+    content: "HOVER BOOKS FOR MORE INFO";
+    font-family: 'Open Sans Condensed', sans-serif;
+    bottom: 20%;
+    left: 20px;
+    transform-origin: left;
+    transform: rotate(270deg);
 }
 
 .book-display {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
@@ -124,8 +137,8 @@ h1 {
     align-self: center;
     place-self: center;
     transition: opacity 0.25s 0s, transform 0.25s;
-    
     border-radius: 0 0 3px 3px;
+    margin: 0 0 20px 0;
 }
 
 .hidden {
@@ -134,6 +147,7 @@ h1 {
 }
 
 .title-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -148,6 +162,11 @@ h1 {
     padding: 10px;
     border: 6px solid rgb(85, 42, 42);
     box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.9);
+    z-index: 1;
+}
+
+.title-container:hover + .meta-container {
+    transform: translateY(0);
 }
 
 .title-container h2 {
@@ -166,7 +185,15 @@ h1 {
     overflow: hidden;
     background: rgba(255, 255, 255, 0.5);
     box-shadow: inset 0 7px 9px -7px rgba(0,0,0,1);
+    transform: translateY(-100%);
+    z-index: -1;
+    transition: 0.3s ease-out;
 }
+
+.meta-container:hover {
+    transform: translateY(0);
+}
+
 
 .page-num {
     font-family: 'Open Sans Condensed', sans-serif;
@@ -192,6 +219,13 @@ h1 {
 
 }
 
+.sofa {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    width: 10%;
+}
+
 .modal {
     position: fixed;
     left: 0;
@@ -203,6 +237,7 @@ h1 {
     visibility: hidden;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 1;
 }
 .modal-content {
     position: absolute;
