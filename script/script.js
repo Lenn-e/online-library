@@ -70,7 +70,9 @@ function addBookToLibrary() {
     myLibrary.push(book);
     displayBook(book);
     addBookModal.classList.toggle("show-modal");
-    window.scrollTo({ top: 10000, behavior: 'smooth' });
+    if (!((window.innerHeight + window.scrollY) >= document.body.offsetHeight)) {
+        window.scrollTo({ top: 10000, behavior: 'smooth' });
+    }
 }
 
 function removeBookFromLibrary() {
