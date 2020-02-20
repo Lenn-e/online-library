@@ -32,6 +32,13 @@ const COVER_COLORS = [
     {background: "#cb6c89", border: "#a1576d"}
 ]
 
+const sampleBooks = [
+    new Book('Frank Herbert', 'Dune', '600', false, 1),
+    new Book('Kurt Vonnegut', 'The Sirens of Titan', '300', true, 2),
+    new Book('Blake Crouch', 'Recursion', '400', true, 3),
+    new Book('Stuart Turton', 'The seven deaths of Evelyn Hardcastle','350', true, 4)
+];
+
 class Library {
     constructor(books = []) {
         this.books = books;
@@ -41,24 +48,31 @@ class Library {
         this.books.push(book);
     }
 
-    removeBook(book) {
-        const index = this.books.indexOf(book);
-        this.books.splice(index, 1);
+    removeBook(bookID) {
+        // filter out the book with the given ID
+        this.books = this.books.filter(book => book.ID != bookID);
     }
 
     displayAllBooks() {
-        this.books.forEach(book => {
+        /* this.books.forEach(book => {
             book.displayBook();
+        }) */
+
+        this.books.forEach(book => {
+            displayBook(book);
         })
+    }
+
+    getBook(bookID) {
+        return this.books.find(bookToFind => bookToFind.ID == bookID);
+    }
+
+    get storedBooksNum() {
+        return this.books.length;
     }
 }
 
-let myLibrary = [];
-
-myLibrary.push(new Book('Frank Herbert', 'Dune', '600', false, 1));
-myLibrary.push(new Book('Kurt Vonnegut', 'The Sirens of Titan', '300', true, 2));
-myLibrary.push(new Book('Blake Crouch', 'Recursion', '400', true, 3));
-myLibrary.push(new Book('Stuart Turton', 'The seven deaths of Evelyn Hardcastle','350', true, 4));
+let myLibrary = new Library(sampleBooks);
 
 function toggleAddBookModal() {
     addBookModal.classList.toggle("show-modal");
@@ -78,8 +92,6 @@ Book.prototype.toggleRead = function() {
 
 Book.prototype.getCoverColor = function() {
     let rand = Math.floor(Math.random() * COVER_COLORS.length);
-    let length = COVER_COLORS.length;
-    console.log("rand: " + rand, "array length: " + length)
     return COVER_COLORS[rand];
 }
 
@@ -89,9 +101,9 @@ function addBookToLibrary() {
     let title = bookTitleInput.value;
     let pagenum = bookPageNumInput.value;
     let isRead = isReadInput.checked;
-    let ID = title + pagenum + myLibrary.length;
+    let ID = title + pagenum + myLibrary.storedBooksNum;
     let book = new Book(author, title, pagenum, isRead, ID);
-    myLibrary.push(book);
+    myLibrary.addBook(book);
     displayBook(book);
     addBookModal.classList.toggle("show-modal");
     if (!((window.innerHeight + window.scrollY) >= document.body.offsetHeight)) {
@@ -104,7 +116,7 @@ function removeBookFromLibrary() {
     let bookNode = this.parentNode.parentNode;
     let bookID = bookNode.id;
 
-    myLibrary = myLibrary.filter(book => book.ID != bookID);
+    myLibrary.removeBook(bookID);
 
     bookNode.classList.toggle("hidden");
     setTimeout(removeBookDisplay, 500, bookNode);
@@ -118,7 +130,7 @@ function changeReadStatus() {
     let bookNode = this.parentNode.parentNode;
     let bookID = bookNode.id;
 
-    let book = myLibrary.find(bookToFind => bookToFind.ID == bookID);
+    let book = myLibrary.getBook(bookID);
     book.toggleRead();
 
     this.classList.toggle("read");
@@ -187,9 +199,7 @@ function bookToNode(book) {
 
 // refactor into library.displayAllBooks() class method
 function displayAllBooks() {
-    myLibrary.forEach(book => {
-        displayBook(book);
-    })
+    
 }
 
 // change into book class method
@@ -201,5 +211,5 @@ function displayBook(book) {
     
 }
 
-displayAllBooks();
+myLibrary.displayAllBooks();
 
