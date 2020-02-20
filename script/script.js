@@ -21,24 +21,8 @@ window.addEventListener('click', event => {
     }
 });
 
-// Other stuff that doesn't belong to a class
-const COVER_COLORS = [
-    {background: "#4b8b81", border: "#345e57"},
-    {background: "#7E7F9A", border: "#535679"},
-    {background: "#90a5b0", border: "#748690"},
-    {background: "#d3a117", border: "#b18610"},
-    {background: "#E0612A", border: "#c35322"},
-    {background: "#723939", border: "#552a2a"},
-    {background: "#cb6c89", border: "#a1576d"}
-]
 
-const sampleBooks = [
-    new Book('Frank Herbert', 'Dune', '600', false, 1),
-    new Book('Kurt Vonnegut', 'The Sirens of Titan', '300', true, 2),
-    new Book('Blake Crouch', 'Recursion', '400', true, 3),
-    new Book('Stuart Turton', 'The seven deaths of Evelyn Hardcastle','350', true, 4)
-];
-
+// Classes
 class Library {
     constructor(books = []) {
         this.books = books;
@@ -54,12 +38,8 @@ class Library {
     }
 
     displayAllBooks() {
-        /* this.books.forEach(book => {
-            book.displayBook();
-        }) */
-
         this.books.forEach(book => {
-            displayBook(book);
+            book.displayBook();
         })
     }
 
@@ -72,18 +52,60 @@ class Library {
     }
 }
 
-let myLibrary = new Library(sampleBooks);
+class Book {
+    constructor(author, title, pageNum, isRead, ID) {
+        this.author = author;
+        this.title = title;
+        this.pageNum = pageNum;
+        this.isRead = isRead;
+        this.ID = ID;
+    }
+
+    toggleRead() {
+        this.isRead = !this.isRead;
+    }
+
+    getCoverColor() {
+        let rand = Math.floor(Math.random() * COVER_COLORS.length);
+        return COVER_COLORS[rand];
+    }
+
+    displayBook() {
+        const node = this.DOMnode;
+        bookDisplay.appendChild(node);
+        node.offsetWidth;
+        node.classList.toggle("hidden");
+    }
+
+    set node(DOMnode) {
+        this.DOMnode = DOMnode;
+    }
+}
+
+// Other stuff that doesn't belong to a class
+const COVER_COLORS = [
+    {background: "#4b8b81", border: "#345e57"},
+    {background: "#7E7F9A", border: "#535679"},
+    {background: "#90a5b0", border: "#748690"},
+    {background: "#d3a117", border: "#b18610"},
+    {background: "#E0612A", border: "#c35322"},
+    {background: "#723939", border: "#552a2a"},
+    {background: "#cb6c89", border: "#a1576d"}
+]
+
+
 
 function toggleAddBookModal() {
     addBookModal.classList.toggle("show-modal");
 }
 
-function Book(author, title, pageNum, isRead, ID) {
+/* function Book(author, title, pageNum, isRead, ID, DOMnode) {
     this.author = author;
     this.title = title;
     this.pageNum = pageNum;
     this.isRead = isRead;
     this.ID = ID;
+    this.DOMnode = DOMnode;
 }
 
 Book.prototype.toggleRead = function() {
@@ -93,7 +115,7 @@ Book.prototype.toggleRead = function() {
 Book.prototype.getCoverColor = function() {
     let rand = Math.floor(Math.random() * COVER_COLORS.length);
     return COVER_COLORS[rand];
-}
+} */
 
 // refactor into newBookSubmit() callback function which calls createBook() function and library.AddBook() function
 function addBookToLibrary() {
@@ -103,15 +125,17 @@ function addBookToLibrary() {
     let isRead = isReadInput.checked;
     let ID = title + pagenum + myLibrary.storedBooksNum;
     let book = new Book(author, title, pagenum, isRead, ID);
+    bookNode = bookToNode(book);
+    book.node = bookToNode(book);
     myLibrary.addBook(book);
-    displayBook(book);
+    book.displayBook();
     addBookModal.classList.toggle("show-modal");
     if (!((window.innerHeight + window.scrollY) >= document.body.offsetHeight)) {
         window.scrollTo({ top: 10000, behavior: 'smooth' });
     }
 }
 
-// refactor into bookDelete() callback function which calls library.removeBook() and removeBookDisplay()
+// refactor into bookDelete() callback function which calls library.removeBook() and library.removeBookDisplay()
 function removeBookFromLibrary() {
     let bookNode = this.parentNode.parentNode;
     let bookID = bookNode.id;
@@ -202,14 +226,19 @@ function displayAllBooks() {
     
 }
 
-// change into book class method
-function displayBook(book) {
-    let bookNode = bookToNode(book);
-    bookDisplay.appendChild(bookNode);
-    bookNode.offsetWidth = bookNode.offsetWidth;
-    bookNode.classList.toggle("hidden");
-    
-}
+// display sample books
+let myLibrary = new Library(sampleBooks);
+
+const sampleBooks = [
+    new Book('Frank Herbert', 'Dune', '600', false, 1),
+    new Book('Kurt Vonnegut', 'The Sirens of Titan', '300', true, 2),
+    new Book('Blake Crouch', 'Recursion', '400', true, 3),
+    new Book('Stuart Turton', 'The seven deaths of Evelyn Hardcastle','350', true, 4)
+];
+
+sampleBooks.forEach(book => {
+    book.node = bookToNode(book);
+});
 
 myLibrary.displayAllBooks();
 
