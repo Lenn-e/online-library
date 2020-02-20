@@ -19,6 +19,15 @@ window.addEventListener('click', event => {
     }
 });
 
+COVER_COLORS = [
+    {background: "#4b8b81", border: "#345e57"},
+    {background: "#7E7F9A", border: "#535679"},
+    {background: "#90a5b0", border: "#748690"},
+    {background: "#d3a117", border: "#b18610"},
+    {background: "#E0612A", border: "#c35322"},
+    {background: "#723939", border: "#552a2a"},
+    {background: "#cb6c89", border: "#a1576d"}
+]
 
 // Classes
 class Library {
@@ -51,26 +60,11 @@ class Library {
 }
 
 class Book {
-    static COVER_COLORS = [
-        {background: "#4b8b81", border: "#345e57"},
-        {background: "#7E7F9A", border: "#535679"},
-        {background: "#90a5b0", border: "#748690"},
-        {background: "#d3a117", border: "#b18610"},
-        {background: "#E0612A", border: "#c35322"},
-        {background: "#723939", border: "#552a2a"},
-        {background: "#cb6c89", border: "#a1576d"}
-    ]
-
     constructor(author, title, pageNum, isRead) {
         this.author = author;
         this.title = title;
         this.pageNum = pageNum;
         this.isRead = isRead;
-    }
-
-    static getCoverColor() {
-        let rand = Math.floor(Math.random() * this.COVER_COLORS.length);
-        return this.COVER_COLORS[rand];
     }
 
     toggleRead() {
@@ -147,7 +141,7 @@ function bookToNode(book) {
 
     let titleContainer = document.createElement('div');
     titleContainer.classList.add('title-container');
-    let coverColor = Book.getCoverColor();
+    let coverColor = getCoverColor();
     titleContainer.style.background = coverColor.background;
     titleContainer.style["border-color"] = coverColor.border;
 
@@ -197,6 +191,11 @@ function bookToNode(book) {
     outterContainer.classList.toggle("hidden");
 
     return outterContainer;
+}
+
+function getCoverColor() {
+    let rand = Math.floor(Math.random() * COVER_COLORS.length);
+    return COVER_COLORS[rand];
 }
 
 // display sample books
