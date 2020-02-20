@@ -9,6 +9,8 @@ const addBookBtn = document.querySelector(".add-book");
 const addBookModal = document.querySelector(".modal");
 const closeAddBookModalBtn = document.querySelector(".close-btn");
 
+// Event callbacks
+
 // Event listeners
 createBookBtn.addEventListener('click', addBookToLibrary);
 addBookBtn.addEventListener('click', toggleAddBookModal);
@@ -19,6 +21,7 @@ window.addEventListener('click', event => {
     }
 });
 
+// Other stuff that doesn't belong to a class
 const COVER_COLORS = [
     {background: "#4b8b81", border: "#345e57"},
     {background: "#7E7F9A", border: "#535679"},
@@ -28,6 +31,27 @@ const COVER_COLORS = [
     {background: "#723939", border: "#552a2a"},
     {background: "#cb6c89", border: "#a1576d"}
 ]
+
+class Library {
+    constructor(books = []) {
+        this.books = books;
+    }
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    removeBook(book) {
+        const index = this.books.indexOf(book);
+        this.books.splice(index, 1);
+    }
+
+    displayAllBooks() {
+        this.books.forEach(book => {
+            book.displayBook();
+        })
+    }
+}
 
 let myLibrary = [];
 
@@ -57,9 +81,9 @@ Book.prototype.getCoverColor = function() {
     let length = COVER_COLORS.length;
     console.log("rand: " + rand, "array length: " + length)
     return COVER_COLORS[rand];
-    /* return COVER_COLORS[Math.round(Math.random() * COVER_COLORS.length)]; */
 }
 
+// refactor into newBookSubmit() callback function which calls createBook() function and library.AddBook() function
 function addBookToLibrary() {
     let author = bookAuthorInput.value;
     let title = bookTitleInput.value;
@@ -75,6 +99,7 @@ function addBookToLibrary() {
     }
 }
 
+// refactor into bookDelete() callback function which calls library.removeBook() and removeBookDisplay()
 function removeBookFromLibrary() {
     let bookNode = this.parentNode.parentNode;
     let bookID = bookNode.id;
@@ -159,12 +184,15 @@ function bookToNode(book) {
     return outterContainer;
 }
 
+
+// refactor into library.displayAllBooks() class method
 function displayAllBooks() {
     myLibrary.forEach(book => {
         displayBook(book);
     })
 }
 
+// change into book class method
 function displayBook(book) {
     let bookNode = bookToNode(book);
     bookDisplay.appendChild(bookNode);
