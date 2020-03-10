@@ -1,5 +1,4 @@
 // DOM nodes
-const createBookBtn = document.querySelector(".create-book-btn");
 const bookAuthorInput = document.querySelector(".book-author-input");
 const bookTitleInput = document.querySelector(".book-title-input");
 const bookPageNumInput = document.querySelector(".book-pagenum-input");
@@ -8,9 +7,10 @@ const bookDisplay = document.querySelector(".book-display");
 const addBookBtn = document.querySelector(".add-book");
 const addBookModal = document.querySelector(".modal");
 const closeAddBookModalBtn = document.querySelector(".close-btn");
+const newBookForm = document.querySelector(".book-creation-form");
 
 // Event listeners
-createBookBtn.addEventListener('click', addBookToLibrary);
+newBookForm.addEventListener('submit', addBookToLibrary);
 addBookBtn.addEventListener('click', toggleAddBookModal);
 closeAddBookModalBtn.addEventListener('click', toggleAddBookModal);
 window.addEventListener('click', event => {
@@ -107,13 +107,18 @@ function changeReadStatus() {
     this.childNodes[0].classList.toggle("hide");
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(event) {
     const book = createBook();
     
     myLibrary.addBook(book);
     book.displayBook();
 
     scrollToBook();
+    event.preventDefault();
+}
+
+function validateBookFormInput() {
+
 }
 
 function createBook() {
